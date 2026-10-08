@@ -1,0 +1,242 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: 'Space Grotesk', -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-bangla: 'Noto Sans Bengali', system-ui, sans-serif;
+
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent-2: hsl(var(--accent-2));
+  --color-accent-3: hsl(var(--accent-3));
+  --color-success: hsl(var(--success));
+  --color-destructive: hsl(var(--destructive));
+  --color-border: hsl(var(--border));
+}
+
+:root {
+  /* Monkeytype Dark Palette with Liquid Glass System */
+  --background: 0 0% 6.7%;         /* Monkeytype dark canvas #111111 */
+  --foreground: 0 0% 93%;          /* Main active text #eeeeee */
+  --card: 0 0% 9.5%;               /* Elevated glass base #181818 */
+  --card-foreground: var(--foreground);
+  --popover: var(--card);
+  --popover-foreground: var(--foreground);
+  --primary: 0 0% 93%;             /* Main active brand / highlights #eeeeee */
+  --primary-foreground: 0 0% 7%;   /* Dark contrast for primary buttons */
+  --secondary: 0 0% 12%;           /* Subtle pill & key background #1f1f1f */
+  --secondary-foreground: var(--foreground);
+  --muted: var(--secondary);
+  --muted-foreground: 220 3% 41%;  /* Monkeytype sub-color #646669 */
+  --accent: var(--primary);
+  --accent-foreground: var(--primary-foreground);
+  --accent-2: 0 0% 75%;            /* Silver legend tone #bfbfbf */
+  --accent-3: 0 0% 55%;            /* Secondary neutral #8c8c8c */
+  --success: 142 55% 50%;          /* Soft clean target green */
+  --destructive: 354 53% 54%;       /* Monkeytype error #ca4754 */
+  --border: 0 0% 16%;              /* Minimalist glass border #292929 */
+  --input: var(--secondary);
+  --ring: var(--primary);
+  --radius: 1rem;
+  --code-bg: 0 0% 8%;              /* Darker inner code #141414 */
+  --cursor: var(--primary);        /* Caret color #eeeeee */
+
+  /* Composite tokens */
+  --gradient-primary: linear-gradient(135deg, hsl(var(--foreground)), hsl(var(--accent-2)));
+  --gradient-glow: radial-gradient(circle at center, rgba(255, 255, 255, 0.08), transparent 70%);
+  --shadow-glow: 0 0 25px rgba(255, 255, 255, 0.08);
+  --shadow-code: 0 4px 20px rgba(0, 0, 0, 0.9);
+}
+
+/* Background canvas guarantee */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-color: hsl(var(--background));
+  pointer-events: none;
+  z-index: -2;
+}
+
+body {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  overflow-x: hidden;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+  letter-spacing: -0.02em;
+}
+
+.font-display {
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+}
+
+.font-body {
+  font-family: var(--font-body, 'Inter', sans-serif);
+}
+
+.font-bangla {
+  font-family: var(--font-bangla, 'Noto Sans Bengali', system-ui, sans-serif);
+  font-feature-settings: "liga" 1, "calt" 1;
+}
+
+.font-mono-code {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+}
+
+/* ==========================================================================
+   3. Glassmorphism Utility Classes
+   ========================================================================== */
+
+/* .glass-panel — Structural Glass (nav, modals, overlays) */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow:
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.15),
+    0 8px 32px rgba(0, 0, 0, 0.45);
+  border-radius: 1rem;
+}
+
+/* .glass-card — Content Cards (main UI primitive) */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(60px);
+  -webkit-backdrop-filter: blur(60px);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow:
+    inset 0 1.5px 1px rgba(255, 255, 255, 0.12),
+    0 8px 24px rgba(0, 0, 0, 0.35);
+  border-radius: 1rem;
+  transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* .glass-hover — Interactive Lift State */
+.glass-hover:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow:
+    inset 0 2px 1px rgba(255, 255, 255, 0.25),
+    0 16px 48px rgba(0, 0, 0, 0.55);
+  transform: translateY(-6px);
+}
+
+/* .glass-shimmer — Hover Light Sweep Effect */
+.glass-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.06) 50%,
+    transparent 60%
+  );
+  transform: translateX(-100%) skewX(-15deg);
+  pointer-events: none;
+}
+
+.glass-shimmer:hover::after {
+  animation: shimmer 0.9s ease forwards;
+}
+
+@keyframes shimmer {
+  0%   { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(200%) skewX(-15deg); }
+}
+
+/* ==========================================================================
+   5. Keyframes & Animation System
+   ========================================================================== */
+
+@keyframes blob {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  33%  { transform: translate(30px, -50px) scale(1.1); }
+  66%  { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+.animate-blob {
+  animation: blob 15s infinite alternate ease-in-out;
+}
+
+@keyframes float {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+.animate-float.delay-100 { animation-delay: 0.3s; }
+.animate-float.delay-300 { animation-delay: 0.9s; }
+.animate-float.delay-500 { animation-delay: 1.5s; }
+
+@keyframes key-pop {
+  0% { transform: scale(0.97); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+.animate-key-pop {
+  animation: key-pop 0.15s ease-out;
+}
+
+.keycap-bump {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 1px;
+}
+
+/* ==========================================================================
+   8. Scrollbar Styling
+   ========================================================================== */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.25);
+  border-radius: 20px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.45);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground) / 0.25) transparent;
+}
